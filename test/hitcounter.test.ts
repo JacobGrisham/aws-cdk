@@ -51,7 +51,7 @@ test('Lambda Has Environment Variables', () => {
   );
 });
 
-test('read capacity can be configured', () => {
+test('Read capacity can be configured', () => {
   const stack = new cdk.Stack();
 
   expect(() => {
