@@ -41,6 +41,7 @@
 * Every pipeline requires at bare minimum:
 * `synth(...)`: The `synthAction` of the pipeline describes the commands necessary to install dependencies, build, and synth the CDK application from source. This should always end in a synth command, for NPM-based projects this is always `npx cdk synth`
 * The `input` of the synth step specifies the repository where the CDK source code is stored.
+* CDK Pipelines auto-update for each commit in a source repo
 
 ## Useful References
 
@@ -70,6 +71,8 @@
  * [lib/hitcounter.ts](https://github.com/JacobGrisham/aws-cdk/blob/main/lib/hitcounter.ts) is where the hit counter construct is defined
  * [lambda/hello.js](https://github.com/JacobGrisham/aws-cdk/blob/main/lambda/hello.js) is where the logic for displaying messages is defined
  * [lambda/hitcounter.js](https://github.com/JacobGrisham/aws-cdk/blob/main/lambda/hitcounter.js) is where the logic for handling hits is defined
+ * [lib/pipeline-stage.ts](https://github.com/JacobGrisham/aws-cdk/blob/main/lambda/pipeline-stage.ts) declares a new Stage (component of a pipeline) and in that stage instantiates our application stack
+ * [lib/pipeline-stack.ts](https://github.com/JacobGrisham/aws-cdk/blob/main/lambda/pipeline-stack.ts) `const deploy` imports and creates an instance of the WorkshopPipelineStage. Later, you might instantiate this stage multiple times (e.g. you want a Production deployment and a separate devlopment/test deployment).
  * [cdk.json](https://github.com/JacobGrisham/aws-cdk/blob/main/cdk.json) file tells the CDK Toolkit how to execute your app. In our case it will be `npx ts-node bin/cdk-workshop.ts`. More specifically, it contains definitions for `cdk` commands.
 
 ## Results
