@@ -17,7 +17,7 @@ export class WorkshopPipelineStack extends cdk.Stack {
         const pipeline = new CodePipeline(this, 'Pipeline', {
           pipelineName: 'WorkshopPipeline',
           synth: new CodeBuildStep('SynthStep', {
-                  input: CodePipelineSource.codeCommit(repo, 'main'),
+                  input: CodePipelineSource.codeCommit('WorkshopRepo', 'main'),
                   installCommands: [
                       'npm install -g aws-cdk'
                   ],
