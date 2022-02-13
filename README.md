@@ -38,11 +38,13 @@
 
 ## Pipelines
 
-* To Do
+* Every pipeline requires at bare minimum:
+* `synth(...)`: The `synthAction` of the pipeline describes the commands necessary to install dependencies, build, and synth the CDK application from source. This should always end in a synth command, for NPM-based projects this is always `npx cdk synth`
+* The `input` of the synth step specifies the repository where the CDK source code is stored.
 
 ## Useful References
 
- * Official [AWS Construct Library](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-construct-library.html)
+ * Official [AWS CDK v2 Construct Library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html)
  * [Open-Source CDK Community](https://constructs.dev/search?q=&cdk=aws-cdk&cdkver=2&sort=downloadsDesc&offset=0)
  * [Testing](https://docs.aws.amazon.com/cdk/v2/guide/testing.html)
 
