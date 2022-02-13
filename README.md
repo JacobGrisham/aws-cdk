@@ -11,8 +11,8 @@
  * `cdk deploy`              deploy this stack to your default AWS account/region. Use as the "build" step for production
  * `cdk deploy --hotswap`    will assess whether a hotswap deployment can be performed instead of a CloudFormation deployment. If possible, the CDK CLI will use AWS service APIs to directly make the changes; otherwise it will fall back to performing a full CloudFormation deployment. This is a one-time operation. Don't use for production.
  * `cdk watch`               monitors your code and assets for changes and attempts to perform a deployment automatically when a change is detected. Defined in cdk.json, it observes the files defined in the `include` array except those defined in the `exclude` array. Use this for faster development
- This project was bootstrapped with `cdk init sample-app --language typescript`
  * `cdk ls`                   list all the stacks in an AWS CDK app
+ * *Note: this project was bootstrapped with `cdk init sample-app --language typescript`*
 
 ## Concepts
 
@@ -20,9 +20,6 @@
  * Are the basic building block of CDK apps. They're like components in React.
  * Like React components, constructs can be made up of other contructs. However in the end, they all boil down to individual AWS services
  * `CdkWorkshopStack`, `lambda.Function`, `HitCounter`, `apigw.LambdaRestApi`, and `TableViewer` are all constructs
- * All share the signature (scope, id, props)
-#### Constructors
- * Are construct initializers
  * All share the signature (scope, id, props)
  * **`scope`**: the first argument is always the scope in which this construct is created. In almost all cases, you’ll be defining constructs within the scope of current construct, which means you’ll usually just want to pass `this` for the first argument
  * **`id`**: the second argument is the local identity of the construct. It’s an ID that has to be unique amongst construct within the same scope. The CDK uses this identity to calculate the CloudFormation Logical ID
@@ -62,9 +59,7 @@
  * [cdk-dynamo-table-viewer](https://github.com/JacobGrisham/aws-cdk/readme-images/lambda-table-viewer.png) construct library installed via [npm](https://www.npmjs.com/package/cdk-dynamo-table-viewer)
 
 ## UML Diagram of the HitCounter Construct
-<div align="center">
-  <img width="200" src="readme-images/hit-counter-construct.png" alt="UML diagram of AWS services described above">
-<div>
+<img width="400" src="readme-images/hit-counter-construct.png" alt="UML diagram of AWS services described above">
 
 ## Folder and File Structure
 
