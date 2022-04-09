@@ -30,6 +30,7 @@
 #### [App](https://docs.aws.amazon.com/cdk/v2/guide/apps.html)
  * We call your CDK application an app, which is represented by the AWS CDK class `App`
  * Is the entrypoint of the CDK application
+ * Can mount multiple stacks
 
 ## Testing
 
