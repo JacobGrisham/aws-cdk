@@ -43,6 +43,7 @@
 * `synth(...)`: The `synthAction` of the pipeline describes the commands necessary to install dependencies, build, and synth the CDK application from source. This should always end in a synth command, for NPM-based projects this is always `npx cdk synth`
 * The `input` of the synth step specifies the repository where the CDK source code is stored.
 * CDK Pipelines auto-update for each commit in a source repo
+* _Note: I created a local branch aws-origin that is set up to track remote branch 'main' from 'aws-origin' in order to push changes to AWS CodeCommit_
 
 ## Useful References
 
