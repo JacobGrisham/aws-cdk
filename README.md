@@ -54,7 +54,7 @@
 # AWS CDK TypeScript Workshop
 
 ## Architecture Diagram of this repo
-<img width="400" src="readme-images/architectire-diagram.png" alt="Architecture diagram of AWS services described below">
+![Architecture diagram of AWS services described below](readme-images/architecture-diagram.png)
 
 ## The instance of the stack (`CdkWorkshopStack`) contains the following:
 
