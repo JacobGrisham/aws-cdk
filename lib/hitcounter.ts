@@ -1,28 +1,19 @@
-import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
+import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
+import { aws_sqs as sqs } from 'aws-cdk-lib';
 
 export interface HitCounterProps {
-  /** the function for which we want to count url hits **/
-  downstream: lambda.IFunction;
-  
-  /**
-   * The read capacity units for the table
-   *
-   * Must be greater than 5 and lower than 20
-   *
-   * @default 5
-   */
   readCapacity?: number;
+  queue: sqs.Queue;
 }
 
 export class HitCounter extends Construct {
 
-  /** allows accessing the counter function */
+  // 👇 allow access to the counter function
   public readonly handler: lambda.Function;
-  
-  /** the hit counter table */
+  // 👇 allow access to the dynamoDB table
   public readonly table: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: HitCounterProps) {
@@ -31,24 +22,24 @@ export class HitCounter extends Construct {
     }
     super(scope, id);
 
+    // 👇 create dynamoDB hit counter table
     this.table = new dynamodb.Table(this, 'Hits', {
         partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING },
         readCapacity: props.readCapacity ?? 5
     });
 
+    // 👇 create lambda with connection to dynamoDB and trigger with SQS
     this.handler = new lambda.Function(this, 'HitCounterHandler', {
         runtime: lambda.Runtime.NODEJS_14_X,
         handler: 'hitcounter.handler',
         code: lambda.Code.fromAsset('lambda'),
+        events: [new SqsEventSource(props.queue)],
         environment: {
-            DOWNSTREAM_FUNCTION_NAME: props.downstream.functionName,
             HITS_TABLE_NAME: this.table.tableName
         }
     });
     
-    // grant the lambda role read/write permissions to our table
+    // 👇 grant the lambda role read/write permissions to our table
     this.table.grantWriteData(this.handler);
-    // grant the lambda role invoke permissions to the downstream function
-    props.downstream.grantInvoke(this.handler);
   }
 }
